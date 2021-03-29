@@ -1,0 +1,29 @@
+{
+  "name": "bhouse-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@amap/amap-vue": "^2.0.12",
+    "@fortawesome/free-brands-svg-icons": "^5.15.3",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@mapbox/mapbox-gl-language": "^0.10.1",
+    "@nuxtjs/axios": "^5.12.4",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.17.3",
+    "core-js": "^3.6.5",
+    "fibers": "^5.0.0",
+    "mapbox-gl": "^2.0.0",
+    "nuxt": "^2.14.6",
+    "nuxt-fontawesome": "^0.4.0",
+    "sass": "^1.30.0",
+    "sass-loader": "^10.1.0"
+  },
+  "devDependencies": {}
+}
