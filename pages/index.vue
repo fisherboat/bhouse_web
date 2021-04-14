@@ -1,11 +1,11 @@
 <template>
 <div class="page">
   <amap id='map' ref="map" :center="center" :zoom="13">
-    <amap-marker v-for="h in houses" :position="[h.longitude, h.latitude]" :label="{content: '¥' + h.amount, direction: 'top' }" :key="h.id" @click="showHouse(h.id)" />
+    <amap-marker v-for="g in gardens" :position="[g.longitude, g.latitude]" :label="{content: `${g.name}(${g.average_price.toFixed(2)}万)`, direction: 'top' }" :icon="require(`~/assets/image/gander.png`)" :key="g.id" @click="showGarden(g.id)" />
   </amap>
   <div id='search' class="rounded shadow">
     <b-form-select id="input-3" v-model="region" :options="regions" required ></b-form-select>
-    houses count: {{houses.length}}
+    garden count: {{gardens.length}}
   </div>
 </div>
 
@@ -13,8 +13,6 @@
 
 <script>
 
-// import mapboxgl from 'mapbox-gl';
-// import MapboxLanguage  from '@mapbox/mapbox-gl-language'
 export default {
   data: function(){
     return {
@@ -23,7 +21,8 @@ export default {
       houses: [],
       regions: [],
       markers: [],
-      center: [],
+      center: [121.433333, 31.183333],
+      gardens: [],
     }
   },
   mounted(){
@@ -32,7 +31,18 @@ export default {
   },
   methods: {
     initMap(){
-      this.loadHouses();
+      this.loadGardens();
+    },
+    loadGardens(){
+      var params = {region: this.region}
+      var self = this
+      self.$store.dispatch("loadGardens", params).then(function(resp){
+        self.gardens = resp.data
+        if(self.houses.length > 0){
+          var g = self.gardens[0]
+          self.center = [g.longitude, g.latitude]
+        }
+      });
     },
     loadHouses(){
       var params = {region: this.region}
@@ -46,9 +56,9 @@ export default {
       });
     },
 
-    showHouse(house_id){
+    showGarden(garden_id){
       var self = this
-      self.$store.commit("setHouseId", house_id)
+      self.$store.commit("setGardenId", garden_id)
     },
     removeMarkers(){
       for (var i = this.markers.length - 1; i >= 0; i--) {
@@ -65,7 +75,7 @@ export default {
   },
   watch: {
     region: function(){
-      this.loadHouses()
+      this.loadGardens()
     }
   }
 }

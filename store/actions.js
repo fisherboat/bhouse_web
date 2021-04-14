@@ -6,6 +6,22 @@ function loadRegions({ commit, state }, params) {
   });
 }
 
+function loadGardens({ commit, state }, params) {
+  return this.$axios({
+    method: "GET",
+    url: `/cities/1/gardens`,
+    params: {region: params.region}
+  });
+}
+
+function loadGarden({ commit, state }, id) {
+  return this.$axios({
+    method: "GET",
+    url: `/gardens/${id}`
+  });
+}
+
+
 function loadHouses({ commit, state }, params) {
   return this.$axios({
     method: "GET",
@@ -27,5 +43,7 @@ function loadHouse({ commit, state }, id) {
 export default {
   loadRegions,
   loadHouses,
-  loadHouse
+  loadHouse,
+  loadGardens,
+  loadGarden
 }
