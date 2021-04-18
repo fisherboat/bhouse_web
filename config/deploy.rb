@@ -60,13 +60,13 @@ task :deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    command "yarn && NODE_ENV=#{fetch(:node_env)} yarn run build"
+    command "yarn && NODE_ENV=#{fetch(:node_env)} yarn run generate"
     invoke :'deploy:cleanup'
-    on :launch do
-      in_path(fetch(:current_path)) do
-        command "pm2 startOrRestart config/ecosystem.config.js"
-      end
-    end
+    # on :launch do
+    #   in_path(fetch(:current_path)) do
+    #     command "pm2 startOrRestart config/ecosystem.config.js"
+    #   end
+    # end
   end
 
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts

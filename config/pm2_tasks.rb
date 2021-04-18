@@ -2,7 +2,7 @@ namespace :pm2 do
 
   desc 'logs'
   task :logs do
-    command "pm2 logs NeptuneWeb"
+    command "pm2 logs Bhouse"
   end
 
   desc 'Status'
