@@ -14,7 +14,7 @@ namespace :pm2 do
   desc 'Start Or Restart'
   task :restart do
     in_path fetch(:current_path) do
-      command "pm2 startOrRestart ./config/ecosystem.json"
+      command "pm2 startOrRestart ./config/ecosystem.config.js"
     end
   end
 

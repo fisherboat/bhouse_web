@@ -18,7 +18,7 @@ set :user, 'ubuntu'
 set :forward_agent, true
 set :keep_releases, 2
 set :repository, 'git@github.com:fisherboat/bhouse.git'
-set :shared_files, fetch(:shared_files, []).push('config/ecosystem.json')
+set :shared_files, fetch(:shared_files, []).push('config/ecosystem.config.js')
 
 set :shared_dirs, fetch(:shared_dirs, []).push('node_modules')
 
@@ -64,7 +64,7 @@ task :deploy do
     invoke :'deploy:cleanup'
     on :launch do
       in_path(fetch(:current_path)) do
-        command "pm2 startOrRestart config/ecosystem.json"
+        command "pm2 startOrRestart config/ecosystem.config.js"
       end
     end
   end
