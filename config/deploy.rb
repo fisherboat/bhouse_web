@@ -33,16 +33,9 @@ task :remote_environment do
   # invoke :'rvm:use', 'ruby-1.9.3-p125@default'
 end
 
-task :staging do
-  set :domain, 'ec2-52-196-244-221.ap-northeast-1.compute.amazonaws.com'
-  set :deploy_to, '/mnt/neptune-web-staging'
-  set :node_env, 'staging'
-  set :branch, 'staging'
-end
-
 task :production do
-  set :domain, 'ec2-18-183-1-126.ap-northeast-1.compute.amazonaws.com'
-  set :deploy_to, '/mnt/neptune-web-production'
+  set :domain, 'tx-app'
+  set :deploy_to, '/home/ubuntu/apps/bhouse'
   set :node_env, 'production'
   set :branch, 'master'
 end
@@ -71,8 +64,6 @@ task :deploy do
     invoke :'deploy:cleanup'
     on :launch do
       in_path(fetch(:current_path)) do
-        command "pwd"
-        # command "pm2 list"
         command "pm2 startOrRestart config/ecosystem.json"
       end
     end
