@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -30,7 +32,7 @@ export default {
   ],
 
   axios: {
-    baseURL: "http://localhost:4000"
+    baseURL: process.env.NODE_ENV === 'production' ? process.env.BASE_URL :  "http://localhost:4000"
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -44,7 +46,11 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
+    '@nuxtjs/dotenv', { filename: '.env.prod' }
   ],
+  dotenv: {
+    /* module options */
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [

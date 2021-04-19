@@ -20,7 +20,7 @@ set :keep_releases, 2
 set :repository, 'git@github.com:fisherboat/bhouse.git'
 set :shared_files, fetch(:shared_files, []).push('config/ecosystem.config.js')
 
-set :shared_dirs, fetch(:shared_dirs, []).push('node_modules')
+# set :shared_dirs, fetch(:shared_dirs, []).push('node_modules')
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
