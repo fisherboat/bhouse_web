@@ -10,7 +10,7 @@ function loadGardens({ commit, state }, params) {
   return this.$axios({
     method: "GET",
     url: `/cities/1/gardens`,
-    params: {region: params.region}
+    params: {region: params.region, bedrooms: params.bedrooms}
   });
 }
 

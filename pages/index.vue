@@ -5,6 +5,7 @@
   </amap>
   <div id='search' class="rounded shadow">
     <b-form-select id="input-3" v-model="region" :options="regions" required ></b-form-select>
+    <b-form-select id="input-4" class="mt-1" v-model="bedrooms" :options="bedrooms_options" required ></b-form-select>
     garden count: {{gardens.length}}
   </div>
 </div>
@@ -18,7 +19,9 @@ export default {
     return {
       map: null,
       region: "徐汇区",
+      bedrooms: 2,
       houses: [],
+      bedrooms_options: [{value: 0, text: "0 室户"}, {value: 1, text: "1 室户"},{value: 2, text: "2 室户"},{value: 3, text: "3 室户"},{value: 4, text: "4 室户"}],
       regions: [],
       markers: [],
       center: [121.433333, 31.183333],
@@ -34,7 +37,7 @@ export default {
       this.loadGardens();
     },
     loadGardens(){
-      var params = {region: this.region}
+      var params = {region: this.region, bedrooms: this.bedrooms}
       var self = this
       self.$store.dispatch("loadGardens", params).then(function(resp){
         self.gardens = resp.data
@@ -76,6 +79,9 @@ export default {
   watch: {
     region: function(){
       this.loadGardens()
+    },
+    bedrooms: function(){
+      this.loadGardens()
     }
   }
 }
@@ -92,7 +98,7 @@ export default {
     top: 1rem;
     left: 1rem;
     position: absolute;
-    height: 5rem;
+    height: 8rem;
     width: 15rem;
     line-height: 2rem;
     background-color: ghostwhite;
