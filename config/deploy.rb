@@ -34,8 +34,8 @@ task :remote_environment do
 end
 
 task :production do
-  set :domain, 'tx-app'
-  set :deploy_to, '/home/ubuntu/apps/bhouse'
+  set :domain, 'tx-shanghai'
+  set :deploy_to, '/home/ubuntu/services/bhouse'
   set :node_env, 'production'
   set :branch, 'master'
 end
