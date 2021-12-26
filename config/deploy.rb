@@ -17,7 +17,7 @@ set :application_name, 'Bhouse web'
 set :user, 'ubuntu'
 set :forward_agent, true
 set :keep_releases, 2
-set :repository, 'git@github.com:fisherboat/bhouse.git'
+set :repository, 'git@github.com:fisherboat/bhouse_web.git'
 set :shared_files, fetch(:shared_files, []).push('config/ecosystem.config.js')
 
 # set :shared_dirs, fetch(:shared_dirs, []).push('node_modules')
@@ -35,7 +35,7 @@ end
 
 task :production do
   set :domain, 'tx-shanghai'
-  set :deploy_to, '/home/ubuntu/services/bhouse'
+  set :deploy_to, '/home/ubuntu/services/web'
   set :node_env, 'production'
   set :branch, 'master'
 end
