@@ -19,6 +19,7 @@ set :forward_agent, true
 set :keep_releases, 2
 set :repository, 'git@github.com:fisherboat/bhouse_web.git'
 set :shared_files, fetch(:shared_files, []).push('config/ecosystem.config.js')
+set :branch, "main"
 
 # set :shared_dirs, fetch(:shared_dirs, []).push('node_modules')
 
