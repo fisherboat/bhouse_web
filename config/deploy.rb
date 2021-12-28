@@ -38,7 +38,6 @@ task :production do
   set :domain, 'tx-shanghai'
   set :deploy_to, '/home/ubuntu/services/web'
   set :node_env, 'production'
-  set :branch, 'master'
 end
 
 # Put any custom commands you need to run at setup
