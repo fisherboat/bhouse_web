@@ -1,8 +1,9 @@
 function loadRegions({ commit, state }, params) {
+
   return this.$axios({
     method: "GET",
     url: `/cities/1/regions`,
-    params: {region: params.region}
+    params: params
   });
 }
 
@@ -23,10 +24,11 @@ function loadGarden({ commit, state }, id) {
 
 
 function loadHouses({ commit, state }, params) {
+  console.log(params)
   return this.$axios({
     method: "GET",
     url: `/cities/1/houses`,
-    params: {region: params.region}
+    params: params
   });
 }
 

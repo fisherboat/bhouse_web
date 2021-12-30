@@ -94,8 +94,8 @@ export default {
     height: 100%;
   }
   #search {
-    padding: 0.5rem;
-    top: 1rem;
+    padding: .5rem;
+    top: 4rem;
     left: 1rem;
     position: absolute;
     height: 8rem;

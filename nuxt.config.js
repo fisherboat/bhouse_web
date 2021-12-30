@@ -2,7 +2,7 @@ require('dotenv').config()
 
 export default {
   env: {
-    BASE_URL: process.env.NODE_ENV === 'production' ? process.env.BASE_URL : "http://localhost:4000",
+    BASE_URL: process.env.NODE_ENV === 'production' ? process.env.BASE_URL : "http://127.0.0.1:4000",
   },
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
