@@ -47,11 +47,31 @@
         <div class="content">{{house.elevator}}</div>
       </div>
     </div>
-    <b-carousel id="carousel-pictures" v-model="slide" :interval="4000" controls indicators background="#ababab" img-width="1024" img-height="480" style="text-shadow: 1px 1px 2px #333;">
-      <template v-for="(picture, index) in house.pictures">
-        <b-carousel-slide :img-src="picture" :key="index"></b-carousel-slide>
-      </template>
-    </b-carousel>
+    <b-card no-body>
+      <b-tabs card>
+        <b-tab title="图片" active>
+          <b-carousel id="carousel-pictures" v-model="slide" :interval="4000" controls indicators background="#ababab" img-width="1024" img-height="480" style="text-shadow: 1px 1px 2px #333;">
+            <template v-for="(picture, index) in house.pictures">
+              <b-carousel-slide :img-src="picture" :key="index"></b-carousel-slide>
+            </template>
+          </b-carousel>
+        </b-tab>
+        <b-tab title="价格">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>日期</th><th>价格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="price in sortedPrices" :key="price.id">
+                <td>{{$moment(price.Date).format('YYYY-MM-DD')}}</td><td>{{price.amount}} {{price.amount > 50 ? "万" : "亿"}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </b-tab>
+      </b-tabs>
+    </b-card>
   </div>
 </template>
 <script>
@@ -66,6 +86,11 @@ export default {
   mounted(){
     this.loadHouse();
   },
+  computed: {
+    sortedPrices: function(){
+      return this.house.prices.sort((a, b) => b.id - a.id );
+    }
+  },
   methods: {
     loadHouse(){
       if(!this.house_id){
@@ -75,13 +100,15 @@ export default {
       self.$store.dispatch("loadHouse", this.house_id).then(function(resp){
         self.house = resp.data
       });
-    }
+    },
+
   },
   watch: {
     house_id: function(new_v, old_v){
       this.loadHouse();
       this.slide = 0
-    }
+    },
+
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-<div class="page px-3">
+<div class="page px-3 pt-5">
   <div class="filters p-2 border rounded mt-3">
     <div class="row">
         <div class="col-1 form-group">
@@ -84,11 +84,12 @@
           <td>{{house.floor}}</td>
           <td>{{house.house_type}}</td>
           <td>{{house.area}}</td>
-          <td>{{house.amount}}万</td>
+          <td>{{house.amount}} {{house.amount > 50 ? "万" : "亿"}}</td>
           <td>{{house.growth_rate}}</td>
         </tr>
       </tbody>
     </table>
+      <b-pagination v-model="search.page" :total-rows="search.total_rows" :per-page="search.page_size" aria-controls="my-table"></b-pagination>
   </div>
 </div>
 </template>
@@ -99,7 +100,8 @@ export default {
   data: function(){
     return {
       houses: [],
-      search: {region: "闵行区", bedrooms: null, living_rooms: null},
+      search: {region: "闵行区", bedrooms: null, living_rooms: null, page: 1, page_size: 20, total_rows: 0},
+      sort: {field: "growth_rate", kind: "ASC"},
       regions: [],
       bedrooms_options: [
         { value: null, text: '选择卧室数' },
@@ -123,9 +125,11 @@ export default {
   methods: {
     loadHouses(){
       var params = JSON.parse(JSON.stringify(this.search))
+      params.sort = `${this.sort.field} ${this.sort.kind}`
       var self = this
       self.$store.dispatch("loadHouses", params).then(function(resp){
-        self.houses = resp.data
+        self.houses = resp.data.houses
+        self.search.total_rows = resp.data.total_rows
       });
     },
     showGarden(garden_id){
@@ -142,21 +146,15 @@ export default {
       self.$store.dispatch("loadRegions", params).then(function(resp){
         self.regions = resp.data
       });
-    },
-    loadRegions(){
-      var params = {}
-      var self = this
-      self.$store.dispatch("loadRegions", params).then(function(resp){
-        self.regions = resp.data
-      });
     }
   },
   watch: {
     search: {
       handler(newName, oldName) {
-        this.loadHouses()
+        if(!!newName){
+          this.loadHouses()
+        }
       },
-      immediate: true,
       deep: true
     }
   }

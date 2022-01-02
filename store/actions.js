@@ -24,7 +24,6 @@ function loadGarden({ commit, state }, id) {
 
 
 function loadHouses({ commit, state }, params) {
-  console.log(params)
   return this.$axios({
     method: "GET",
     url: `/cities/1/houses`,

@@ -34,7 +34,7 @@
       <tbody>
         <tr v-for="house in garden.houses" :key="house.id">
           <td scope="col">{{house.area}}</td>
-          <td scope="col">{{house.amount}}</td>
+          <td scope="col">{{house.amount}} {{house.amount > 50 ? "万" : "亿"}} </td>
           <td scope="col">{{house.house_type}}</td>
           <td scope="col">{{house.decoration}}</td>
           <td scope="col">{{house.floor}}</td>
